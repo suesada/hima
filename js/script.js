@@ -1,5 +1,5 @@
 let size = 40;
-const himaMax = 12;
+const himaMax = 16;
 
 let cw = document.documentElement.clientWidth;
 let ch = document.documentElement.clientHeight;
@@ -30,7 +30,7 @@ const reflesh = () => {
 	ctx.clearRect(0, 0, cw, ch);
 
 	let emptyIndex = hima.findIndex(hp => hp.x == -1);
-	if (emptyIndex >= 0 && randomInt(0, 16) == 0) {
+	if (emptyIndex >= 0 && randomInt(0, 10) == 0) {
 		hima[emptyIndex] = {'x': randomInt(0, cw - size), 'y': randomInt(0, ch - size), 'h': 1, 'f': false};
 	}
 
