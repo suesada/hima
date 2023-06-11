@@ -9,8 +9,8 @@ document.body.style.height = ch.toString() + 'px';
 
 let canvas = document.querySelector('canvas');
 
-canvas.setAttribute('width', cw);
-canvas.setAttribute('height', ch);
+canvas.setAttribute('width', cw - size);
+canvas.setAttribute('height', ch - size);
 
 canvas.style.width = cw.toString() + 'px';
 canvas.style.height = ch.toString() + 'px';
