@@ -18,12 +18,10 @@ canvas.style.height = ch.toString() + 'px';
 let himaImg = new Image();
 himaImg.src = '.\\svg\\hima.svg';
 
-let himaPos = [];
+let hima = [];
 for (let i = 0; i < himaMax; i++) {
-	himaPos.push({'x': -1, 'y': -1, 'h': 0});
+	hima.push({'x': -1, 'y': -1, 'h': 0, 'f': -1});
 }
-
-let crushHima = [];
 
 const randomInt = (min, max) => min + Math.floor(Math.random() * (max + 1 - min));
 
@@ -31,21 +29,20 @@ const reflesh = () => {
 	let ctx = canvas.getContext('2d');
 	ctx.clearRect(0, 0, cw, ch);
 
-	let emptyIndex = himaPos.findIndex(hp => hp.x == -1);
+	let emptyIndex = hima.findIndex(hp => hp.x == -1);
 	if (emptyIndex >= 0 && randomInt(0, 10) < 1) {
-		himaPos[emptyIndex] = {'x': randomInt(0, cw - size), 'y': randomInt(0, ch - size), 'h': 1};
+		hima[emptyIndex] = {'x': randomInt(0, cw - size), 'y': randomInt(0, ch - size), 'h': 1, 'f': false};
 	}
 
-	for (let i = 0; i < himaPos.length; i++) {
-		if (himaPos[i].x != -1) {
-			if (crushHima.indexOf(i) >= 0) {
-				himaPos[i].h -= 0.1;
+	for (let i = 0; i < hima.length; i++) {
+		if (hima[i].x != -1) {
+			if (hima[i].f) {
+				hima[i].h -= 0.1;
 			}
-			if (himaPos[i].h <= 0) {
-				crushHima.splice(crushHima.indexOf(i));
-				himaPos[i] = {'x': -1, 'y': -1, 'h': 0};
+			if (hima[i].h <= 0) {
+				hima[i] = {'x': -1, 'y': -1, 'h': 0, 'f': false};
 			} else {
-				ctx.drawImage(himaImg, himaPos[i].x, himaPos[i].y + size * (1 - himaPos[i].h) / 2, size, size * himaPos[i].h);
+				ctx.drawImage(himaImg, hima[i].x, hima[i].y + size * (1 - hima[i].h) / 2, size, size * hima[i].h);
 			}
 		}
 	}
@@ -63,9 +60,9 @@ canvas.onclick = (e) => {
 	let x = e.pageX - clientRect.left;
 	let y = e.pageY - clientRect.top;
 
-	for (let i = 0; i < himaPos.length; i++) {
-		if ((x > himaPos[i].x && x < himaPos[i].x + size) && (y > himaPos[i].y && y < himaPos[i].y + size)) {
-			crushHima.push(i);
+	for (let i = 0; i < hima.length; i++) {
+		if ((x > hima[i].x && x < hima[i].x + size) && (y > hima[i].y && y < hima[i].y + size)) {
+			hima[i].f = true;
 		}
 	}
 }
