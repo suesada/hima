@@ -1,5 +1,5 @@
 let size = 40;
-const himaMax = 16;
+const himaMax = 12;
 
 let cw = document.documentElement.clientWidth;
 let ch = document.documentElement.clientHeight;
