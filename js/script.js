@@ -50,7 +50,7 @@ const reflesh = () => {
 		}
 	}
 
-	setTimeout('reflesh()', 50);
+	setTimeout('reflesh()', 20);
 }
 
 himaImg.onload = () => {
